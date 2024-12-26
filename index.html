@@ -1,12 +1,31 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Мой сайт на GitHub Pages</title>
+    <title>XSS Vulnerable Site</title>
 </head>
 <body>
-    <h1>Добро пожаловать на мой сайт!</h1>
-    <p>Это мой первый сайт, размещенный на GitHub Pages.</p>
+    <h1>Welcome to the XSS Vulnerable Site</h1>
+    <form id="commentForm">
+        <label for="comment">Leave a comment:</label><br>
+        <input type="text" id="comment" name="comment"><br>
+        <input type="submit" value="Submit">
+    </form>
+
+    <h2>Comments:</h2>
+    <div id="commentsSection"></div>
+
+    <script>
+        document.getElementById('commentForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Предотвращаем отправку формы
+
+            // Получаем значение комментария
+            var comment = document.getElementById('comment').value;
+
+            // Добавляем комментарий в секцию комментариев без экранирования
+            document.getElementById('commentsSection').innerHTML += '<p>' + comment + '</p>';
+        });
+    </script>
 </body>
 </html>
